@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Dropdown from "../../common/DropDown";
 import { AttendanceStatus, IAttendance } from "../../types/attendance"; // Import the enum
 import { updateAttendanceStatus } from "../../../services/attendanceService";

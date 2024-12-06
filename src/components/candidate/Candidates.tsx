@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { IProfile, IProfileStatus } from "../types/profile";
+import { IProfileStatus } from "../types/profile";
 import { getCandidates } from "../../services/candidateService";
 import CandidatesTable from "./CandidatesTable";
 import PageHeader from "../common/PageHeader";
 import CandidateFilters from "./filters/CandidateFilters";
 import { useTagContext } from "../../context/tagContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Pagination from "../common/pagination/Pagination";
 import { IResponse } from "../types/common";
 export default function Candidates() {
     const { tags } = useTagContext();
     const tag = "candidate";
     const [candidates, setCandidates] = useState<IResponse>();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [loading, setLoading] = useState(false);
+    const [searchParams] = useSearchParams();
 
     // Extract query parameters from the URL
     const rowsPerPage = searchParams.get("rowsperpage") || 8;

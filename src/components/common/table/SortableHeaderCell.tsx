@@ -6,12 +6,6 @@
 import { cn } from "../../../utils/cn";
 import { Label } from "../Label";
 
-const _paramKeys = {
-    sortColumn: "sortColumn",
-    sortOrder: "sortOrder",
-};
-
-const _sortOrder = { asc: "asc", desc: "desc" };
 interface ISortableHeaderProps {
     columnName: string;
     label: string;
@@ -22,12 +16,8 @@ interface ISortableHeaderProps {
 }
 
 export default function SortableHeaderCell({
-    columnName,
     label,
-    defaultSortColumn,
-    defaultSortOrder,
     className,
-    iconClass,
 }: ISortableHeaderProps) {
     // const { appendSearchParams } = useURLParams();
     // const _defaultSortColumn = defaultSortColumn ? columnName : "";

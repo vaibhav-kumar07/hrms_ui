@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import PageHeader from "../common/PageHeader";
 import AttendanceTable from "./AttendanceTable";
 import { getAllAttenanceRecords } from "../../services/attendanceService";
-import { AttendanceStatus, IAttendance } from "../types/attendance";
+import { AttendanceStatus } from "../types/attendance";
 import AttendanceFilters from "./AttendanceFilters";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useTagContext } from "../../context/tagContext";
 import Pagination from "../common/pagination/Pagination";
 import { IResponse } from "../types/common";
@@ -12,8 +12,8 @@ export default function Attendences() {
     const { tags } = useTagContext();
     const tag = "attendance";
     const [response, setResponse] = useState<IResponse>();
-    const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [searchParams] = useSearchParams();
     // Extract query parameters from the URL
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
@@ -31,7 +31,7 @@ export default function Attendences() {
     useEffect(() => {
         reloadCandidates();
     }, [tags[tag], page, rowsPerPage, status, searchText]);
-    console.log("records", response);
+
     return (
         <section className="flex flex-col gap-4 ">
             <PageHeader

@@ -1,6 +1,6 @@
 
 import { QueryParameters } from '@/components/types/common';
-import { CandidateParams, IProfileRole, IProfileStatus } from '..//components/types/profile';
+import { CandidateParams, IProfileRole } from '..//components/types/profile';
 import * as FetchUtils from '../utils/fetch';
 import qs from 'query-string';
 const backendUrl = "http://localhost:6001"

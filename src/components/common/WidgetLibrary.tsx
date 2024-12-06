@@ -3,10 +3,11 @@ import UpdateTaskInput from "../attendance/widgets/UpdateTask";
 import StatusFilterWidget from "../candidate/widgets/StatusFilterWidget";
 import { EditEmployeeDialog } from "../employee/widgets/EditEmployeeDialog";
 import LeaveStatusUpdateDropDown from "../leave/widgets/LeaveStatusUpdateDropDown";
-import { IProfile, IProfileStatus } from "../types/profile";
+import { IProfileStatus } from "../types/profile";
 
 const widgets: any = {
     editEmployeeWidget: (value: string, rowData: any) => {
+        console.log("value", value);
         return (
             <EditEmployeeDialog
                 employeeData={rowData}
@@ -15,6 +16,7 @@ const widgets: any = {
         );
     },
     attendanceStatusUpdateWidget: (value: string, rowData: any) => {
+        console.log("value", value);
         return <StatusUpdateDropDown rowData={rowData} />;
     },
     updateTaskInput: (value: string, rowData: any) => {
@@ -29,6 +31,7 @@ const widgets: any = {
         );
     },
     leaveStatusUpdateDropDown: (value: string, rowData: any) => {
+        console.log("value", value);
         return <LeaveStatusUpdateDropDown rowData={rowData} />;
     },
 };

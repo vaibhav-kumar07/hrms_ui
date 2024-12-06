@@ -1,5 +1,5 @@
 import { getCookieValue, setCookie } from "./cookies";
-import { ErrorResponse, handleApiError } from "./errorHandler";
+import { handleApiError } from "./errorHandler";
 
 const updateTokenAndRedirect = () => {
     setCookie("token", "");

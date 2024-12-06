@@ -1,11 +1,9 @@
 
 import { AttendanceParams, AttendanceStatus } from '../components/types/attendance';
-import { CandidateParams, IProfileRole } from '..//components/types/profile';
 import * as FetchUtils from '../utils/fetch';
-import { stat } from 'fs';
 import qs from 'query-string';
 import { QueryParameters } from '../components/types/common';
-const backendUrl = "http://localhost:6001"
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 

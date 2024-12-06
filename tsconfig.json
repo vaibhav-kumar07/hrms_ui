@@ -6,9 +6,7 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
         "module": "ESNext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
@@ -18,7 +16,12 @@
         "baseUrl": "./src",
         "paths": {
             "@/*": ["*"]
-        }
+        },
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true
     },
     "include": ["src"]
 }

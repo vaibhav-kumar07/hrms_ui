@@ -1,15 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../../context/authContext";
 import { setCookie } from "../../utils/cookies";
 
-export function LogoutConfirmationDialog({
-    className,
-}: {
-    className?: string;
-}) {
+export function LogoutConfirmationDialog({}: { className?: string }) {
     const { setToken } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const dialogRef = useRef<HTMLDivElement>(null);

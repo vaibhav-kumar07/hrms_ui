@@ -4,7 +4,7 @@ import { Label } from "../common/Label";
 import { ITableMetadata } from "../common/table/Table";
 import TableHeader from "../common/table/TableHeader";
 import TableRow from "../common/table/TableRow";
-import { ILeave, LeaveStatus } from "../types/leave"; // Import the ILeave and LeaveStatus
+import { ILeave } from "../types/leave"; // Import the ILeave and LeaveStatus
 
 interface LeaveTableProps {
     leaveRecords: ILeave[];

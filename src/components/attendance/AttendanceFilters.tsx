@@ -1,4 +1,3 @@
-import React from "react";
 import AttendanceStatusFilter from "./AttendanceStatusFilter";
 import SearchBox from "../common/SearchBox";
 

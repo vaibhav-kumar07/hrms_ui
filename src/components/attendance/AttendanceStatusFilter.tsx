@@ -1,4 +1,3 @@
-import React from "react";
 import UrlBasedDropDown from "../common/UrlBasedDropDown";
 import { AttendanceStatusOption } from "../types/attendance";
 

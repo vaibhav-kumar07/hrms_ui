@@ -3,8 +3,7 @@ import { QueryParameters } from '@/components/types/common';
 import { CandidateParams, IProfileRole, IProfileStatus } from '../components/types/profile';
 import * as FetchUtils from '../utils/fetch';
 import qs from "query-string";
-// const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const backendUrl = "http://localhost:6001"
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 

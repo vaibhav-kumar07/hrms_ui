@@ -1,8 +1,8 @@
 
 import * as FetchUtils from '../utils/fetch';
 
-// const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const backendUrl = "http://localhost:6001"
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 
 

@@ -1,5 +1,4 @@
 import { cn } from "../../utils/cn";
-import { formatDateToIST } from "../../utils/date-utils";
 import { Label } from "../common/Label";
 import { ITableMetadata } from "../common/table/Table";
 import TableHeader from "../common/table/TableHeader";

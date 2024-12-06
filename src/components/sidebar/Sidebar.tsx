@@ -1,11 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-    FaUserFriends,
-    FaChartBar,
-    FaClipboardList,
-    FaSignOutAlt,
-} from "react-icons/fa";
+import { FaUserFriends, FaChartBar, FaClipboardList } from "react-icons/fa";
 import { Label } from "../common/Label";
 import LogoutConfirmationDialog from "../logout/LogoutDialog";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import LeavesStatusFilter from "./LeavesStatusFilter";
 import SearchBox from "../../common/SearchBox";
 import AddNewLeaveDialog from "../AddNewLeaveDialog";

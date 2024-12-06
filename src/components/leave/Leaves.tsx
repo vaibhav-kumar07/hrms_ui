@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PageHeader from "../common/PageHeader";
 import { useTagContext } from "../../context/tagContext";
-import { ILeave, LeaveStatus } from "../types/leave";
+import { LeaveStatus } from "../types/leave";
 import { getLeaves } from "../../services/leaveService";
 import LeavesTable from "./LeaveTable";
 import { useSearchParams } from "react-router-dom";
@@ -12,7 +12,7 @@ export default function Leaves() {
     const { tags } = useTagContext();
     const tag = "leaves";
     const [response, setResponse] = useState<IResponse>();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
     const searchText = searchParams.get("q") || "";

@@ -4,10 +4,9 @@ import { DialogHeader } from "../../ui/dialog";
 import UpdateEmployeeForm from "./EditEmployeeDetails";
 import { IProfile } from "../../types/profile";
 import { Pencil } from "lucide-react";
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 export function EditEmployeeDialog({
-    className,
     employeeData,
 }: {
     className?: string;

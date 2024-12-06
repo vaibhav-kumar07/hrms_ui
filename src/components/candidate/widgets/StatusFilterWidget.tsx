@@ -51,7 +51,7 @@ const StatusFilterWidget: React.FC<StatusFilterWidgetProps> = ({
         if (currentStatus !== selectedStatus) {
             handleUpdateService();
         }
-    }, [selectedStatus]);
+    }, [selectedStatus, currentStatus, rowData._id]);
 
     return (
         <Dropdown

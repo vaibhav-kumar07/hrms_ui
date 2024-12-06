@@ -24,7 +24,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     const [selectedValue, setSelectedValue] = useState(
         value || options[0].value,
     );
-
+    console.log("open", isOpen);
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         onChange(e.target.value);
         setSelectedValue(e.target.value);

@@ -1,5 +1,4 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PaginationBar from "./PaginationBar";
 import { useURLParams, useGetSearchParamValue } from "../../../hooks/request";
 import { cn } from "../../../utils/cn";

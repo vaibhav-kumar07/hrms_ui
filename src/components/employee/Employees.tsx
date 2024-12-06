@@ -4,15 +4,15 @@ import EmployeesTable from "./EmployeeTable";
 import PageHeader from "../common/PageHeader";
 import { useTagContext } from "../../context/tagContext";
 import { getEmployees } from "../../services/employeeService";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { IResponse } from "../types/common";
 import Pagination from "../common/pagination/Pagination";
 import Employeefilters from "./Employeefilters";
 export default function Employees() {
     const { tags } = useTagContext();
     const tag = "employee";
-    const [searchParams, setSearchParams] = useSearchParams();
-    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+
     const [response, setResponse] = useState<IResponse>();
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
