@@ -1,4 +1,3 @@
-"use client";
 // import {
 //     useURLParams,
 //     useGetSearchParamValue,
@@ -55,16 +54,15 @@ export default function SortableHeaderCell({
         </Label>
     );
 }
-
 export function SortArrow({
-    direction: direction,
+    direction,
     className,
 }: {
     direction: string;
     className?: string;
 }) {
     return (
-        <span className={cn("text-muted-foreground  ", className)}>
+        <span className={cn("text-muted-foreground", className)}>
             {direction === "asc" ? " ▲" : " ▼"}
         </span>
     );

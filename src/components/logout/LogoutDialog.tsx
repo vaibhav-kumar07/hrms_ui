@@ -5,7 +5,11 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../../context/authContext";
 import { setCookie } from "../../utils/cookies";
 
-export function LogoutConfirmationDialog({}: { className?: string }) {
+export default function LogoutConfirmationDialog({
+    className,
+}: {
+    className?: string;
+}) {
     const { setToken } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const dialogRef = useRef<HTMLDivElement>(null);
@@ -49,7 +53,7 @@ export function LogoutConfirmationDialog({}: { className?: string }) {
         <>
             <button
                 onClick={handleDialogOpen}
-                className=" px-10 mt-1 flex items-center gap-3 text-gray-400 font-medium transition-colors "
+                className={` px-10 mt-1 flex items-center gap-3 text-gray-400 font-medium transition-colors ${className}`}
             >
                 <FaSignOutAlt size={18} />
                 <span>Log out</span>
@@ -95,5 +99,3 @@ export function LogoutConfirmationDialog({}: { className?: string }) {
         </>
     );
 }
-
-export default LogoutConfirmationDialog;

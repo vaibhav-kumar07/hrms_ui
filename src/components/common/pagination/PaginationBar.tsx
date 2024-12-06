@@ -62,23 +62,23 @@ const PageArrows = ({ page, totalPages, onPageChange }: any) => {
     return (
         <div className="flex">
             {hasPreviousPages && (
-                <a
+                <button
                     className="cursor-pointer"
                     onClick={() => onPageChange(page - 1)}
                 >
                     <ChevronLeft className="h-6 w-6 text-slate-700" />
-                </a>
+                </button>
             )}
             {!hasPreviousPages && (
                 <ChevronLeft className="h-6 w-6 text-slate-400" />
             )}
             {hasMorePages && (
-                <a
+                <button
                     className="cursor-pointer"
                     onClick={() => onPageChange(page + 1)}
                 >
                     <ChevronRight className="h-6 w-6 text-slate-700" />
-                </a>
+                </button>
             )}
             {!hasMorePages && (
                 <ChevronRight className="h-6 w-6 text-slate-400" />

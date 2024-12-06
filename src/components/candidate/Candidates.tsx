@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { IProfileStatus } from "../types/profile";
 import { getCandidates } from "../../services/candidateService";
 import CandidatesTable from "./CandidatesTable";
@@ -8,23 +8,22 @@ import { useTagContext } from "../../context/tagContext";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../common/pagination/Pagination";
 import { IResponse } from "../types/common";
+
 export default function Candidates() {
     const { tags } = useTagContext();
     const tag = "candidate";
     const [candidates, setCandidates] = useState<IResponse>();
     const [searchParams] = useSearchParams();
-
+    const currentTag = tags[tag];
     // Extract query parameters from the URL
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
     const position = searchParams.get("position") || "";
     let status = searchParams.get("status") as IProfileStatus;
     const searchText = searchParams.get("q") || "";
-    // const sortOrder = searchParams.get("sortOrder") || "desc";
-    // const sortColumn = searchParams.get("sortColumn") || "created_at";
-    // const status = searchParams.get("status") || "";
 
-    const reloadCandidates = async () => {
+    // Use useCallback to memoize the function
+    const reloadCandidates = useCallback(async () => {
         const result = await getCandidates({
             rowsPerPage: rowsPerPage as number,
             page: page as number,
@@ -33,12 +32,11 @@ export default function Candidates() {
             searchText,
         });
         setCandidates(result);
-    };
+    }, [rowsPerPage, page, position, status, searchText]);
 
     useEffect(() => {
-        // Initial fetch of candidates
         reloadCandidates();
-    }, [tags[tag], page, rowsPerPage, position, status, searchText]);
+    }, [reloadCandidates, currentTag]); // Added reloadCandidates in the dependency array
 
     return (
         <section className="flex flex-col gap-4">

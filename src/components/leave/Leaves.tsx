@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import PageHeader from "../common/PageHeader";
 import { useTagContext } from "../../context/tagContext";
 import { LeaveStatus } from "../types/leave";
@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import { IResponse } from "../types/common";
 import Pagination from "../common/pagination/Pagination";
 import LeavesFilters from "./filters/LeavesFilters";
+
 export default function Leaves() {
     const { tags } = useTagContext();
     const tag = "leaves";
@@ -17,7 +18,11 @@ export default function Leaves() {
     const page = searchParams.get("page") || 1;
     const searchText = searchParams.get("q") || "";
     const status = searchParams.get("status") as LeaveStatus;
-    const reloadCandidates = async () => {
+
+    const currentTag = tags[tag];
+
+    // Memoize the reloadCandidates function
+    const reloadCandidates = useCallback(async () => {
         const result = await getLeaves({
             rowsPerPage: rowsPerPage as number,
             page: page as number,
@@ -25,12 +30,11 @@ export default function Leaves() {
             searchText,
         });
         setResponse(result);
-    };
+    }, [rowsPerPage, page, status, searchText]);
 
     useEffect(() => {
-        // Initial fetch of candidates
         reloadCandidates();
-    }, [tags[tag], page, rowsPerPage, status, searchText]);
+    }, [reloadCandidates, currentTag]);
 
     return (
         <section className="flex flex-col gap-4 ">

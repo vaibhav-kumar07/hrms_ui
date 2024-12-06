@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IProfile } from "../types/profile";
 import EmployeesTable from "./EmployeeTable";
 import PageHeader from "../common/PageHeader";
@@ -12,14 +12,15 @@ export default function Employees() {
     const { tags } = useTagContext();
     const tag = "employee";
     const [searchParams] = useSearchParams();
-
+    const currentTag = tags[tag];
     const [response, setResponse] = useState<IResponse>();
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
     const position = searchParams.get("position") || "";
     const searchText = searchParams.get("q") || "";
 
-    const reloadCandidates = async () => {
+    // Memoize the reloadCandidates function
+    const reloadCandidates = useCallback(async () => {
         const result = await getEmployees({
             rowsPerPage: rowsPerPage as number,
             page: page as number,
@@ -27,11 +28,11 @@ export default function Employees() {
             searchText,
         });
         setResponse(result);
-    };
+    }, [rowsPerPage, page, position, searchText]);
 
     useEffect(() => {
         reloadCandidates();
-    }, [tags[tag], rowsPerPage, page, position, searchText]);
+    }, [reloadCandidates, currentTag]);
 
     return (
         <section className="flex flex-col gap-4">
