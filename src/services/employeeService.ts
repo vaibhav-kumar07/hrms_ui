@@ -3,9 +3,7 @@ import { QueryParameters } from '@/components/types/common';
 import { CandidateParams, IProfileRole } from '..//components/types/profile';
 import * as FetchUtils from '../utils/fetch';
 import qs from 'query-string';
-const backendUrl = "http://localhost:6001"
-
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const getEmployees = async (params: CandidateParams): Promise<any> => {
     const response = await FetchUtils.get(`${backendUrl}/api/profiles/employees?${buildQueryString(params)}`, { isWithToken: true });
