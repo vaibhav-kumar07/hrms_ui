@@ -6,6 +6,7 @@ import { z } from "zod";
 import Input from "./Input"; // Import Input component
 import { setCookie } from "../../utils/cookies";
 import Logo from "./Logo";
+import { useAuth } from "../.././context/authContext";
 
 const RegisterSchema = z
     .object({
@@ -37,7 +38,7 @@ const RegisterPage: React.FC = () => {
     const [generalError, setGeneralError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const navigate = useNavigate();
-
+    const { setToken } = useAuth();
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -68,6 +69,7 @@ const RegisterPage: React.FC = () => {
             });
             setCookie("token", result.token);
             setSuccessMessage("Registration successful!");
+            setToken(result.token);
             setGeneralError(null);
             setFieldErrors([]);
             navigate("/dashboard");
@@ -88,7 +90,7 @@ const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center md:w-1/2 bg-white p-8 rounded-3xl md:rounded-l-2xl shadow-md border border-gray-300">
+        <div className="w-full h-full flex flex-col justify-center items-center md:w-1/2 bg-white p-10 rounded-3xl md:rounded-l-3xl md:rounded-r-none shadow-md md:border-y md:border-l border-gray-300">
             <div className="relative top-4 left-4">
                 <Logo />
             </div>
