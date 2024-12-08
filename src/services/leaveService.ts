@@ -4,8 +4,8 @@ import { LeaveParams, LeaveStatus } from '../components/types/leave';
 import { QueryParameters } from '../components/types/common';
 import qs from 'query-string';
 import { formatDate } from '../utils/date-utils';
-// const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const backendUrl = "http://localhost:6001"
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+// const backendUrl = "http://localhost:6001"
 
 export const getLeaves = async (params: LeaveParams): Promise<any> => {
     const response = await FetchUtils.get(`${backendUrl}/api/leaves?${buildQueryString(params)}`, { isWithToken: true });
