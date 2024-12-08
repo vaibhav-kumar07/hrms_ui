@@ -1,11 +1,12 @@
 import React from "react";
 import Dropdown from "../../common/DropDown";
-import { AttendanceStatus, IAttendance } from "../../types/attendance"; // Import the enum
-import { updateAttendanceStatus } from "../../../services/attendanceService";
+import { AttendanceStatus } from "../../types/attendance";
 import { useToast } from "../../../contexts/ToastContext";
+import { IProfile } from "../../../components/types/profile";
+import { updateEmployeeAttendanceStatus } from "../../../services/employeeService";
 
 interface StatusUpdateDropDownProps {
-    rowData: IAttendance;
+    rowData: IProfile;
 }
 
 const StatusUpdateDropDown: React.FC<StatusUpdateDropDownProps> = ({
@@ -19,7 +20,7 @@ const StatusUpdateDropDown: React.FC<StatusUpdateDropDownProps> = ({
     }));
 
     const handleStatusChange = (newStatus: AttendanceStatus) => {
-        updateAttendanceStatus({
+        updateEmployeeAttendanceStatus({
             id: rowData._id as string,
             status: newStatus,
         });
@@ -29,7 +30,7 @@ const StatusUpdateDropDown: React.FC<StatusUpdateDropDownProps> = ({
     return (
         <Dropdown
             options={statusOptions}
-            value={rowData.status}
+            value={rowData.attendance_status as AttendanceStatus}
             onChange={(status: string) =>
                 handleStatusChange(status as AttendanceStatus)
             }

@@ -18,13 +18,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     className,
     optionClass,
 }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const selectRef = useRef<HTMLSelectElement | null>(null);
 
     const [selectedValue, setSelectedValue] = useState(
         value || options[0].value,
     );
-    console.log("open", isOpen);
+    // console.log("open", isOpen);
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         onChange(e.target.value);
         setSelectedValue(e.target.value);
@@ -42,7 +42,6 @@ const Dropdown: React.FC<DropdownProps> = ({
                     " left-0 w-full mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10 px-2 py-3",
                     className,
                 )}
-                onBlur={() => setIsOpen(true)}
             >
                 {options.map((option) => (
                     <option

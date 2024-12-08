@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import PageHeader from "../common/PageHeader";
 import AttendanceTable from "./AttendanceTable";
-import { getAllAttenanceRecords } from "../../services/attendanceService";
 import { AttendanceStatus } from "../types/attendance";
 import AttendanceFilters from "./filters/AttendanceFilters";
 import { useSearchParams } from "react-router-dom";
@@ -9,6 +8,7 @@ import { useTagContext } from "../../contexts/TagContext";
 import Pagination from "../common/pagination/Pagination";
 import { IResponse } from "../types/common";
 import Loader from "../common/Loader";
+import { getEmployees } from "../../services/employeeService";
 
 export default function Attendences() {
     const { isTagOn, clearTag } = useTagContext();
@@ -23,11 +23,11 @@ export default function Attendences() {
     const reloadAttendanceRecords = useCallback(async () => {
         setLoading(true);
         try {
-            const result = await getAllAttenanceRecords({
+            const result = await getEmployees({
                 rowsPerPage: rowsPerPage as number,
                 page: page as number,
-                status: status as AttendanceStatus,
                 searchText: searchText as string,
+                attendance_status: status as AttendanceStatus,
             });
             setResponse(result);
         } catch (error) {

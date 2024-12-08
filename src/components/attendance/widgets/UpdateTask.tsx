@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IAttendance } from "../../types/attendance";
-import { updateAttendanceTask } from "../../../services/attendanceService";
 import { useToast } from "../../../contexts/ToastContext";
+import { updateEmployeeTask } from "../../../services/employeeService";
 interface StatusUpdateInputProps {
     rowData: IAttendance;
     value: string;
@@ -19,7 +19,7 @@ const UpdateTaskInput: React.FC<StatusUpdateInputProps> = ({
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            updateAttendanceTask({
+            updateEmployeeTask({
                 id: rowData._id as string,
                 task,
             });

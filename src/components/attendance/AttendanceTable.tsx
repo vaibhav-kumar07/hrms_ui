@@ -19,7 +19,7 @@ const attendanceMetadata: ITableMetadata[] = [
         cellClass: "w-full md:w-[5%] text-left md:pl-3 ",
     },
     {
-        columnName: "employeeName",
+        columnName: "name",
         headerLabel: "Employee Name",
         sortable: false,
         defaultSortOrder: "asc",
@@ -28,7 +28,7 @@ const attendanceMetadata: ITableMetadata[] = [
         cellClass: "w-full md:w-[15%] text-left font-semibold md:pl-2",
     },
     {
-        columnName: "designation",
+        columnName: "position",
         headerLabel: "Designation",
         sortable: false,
         columnClass: "w-full md:w-[15%] text-left text-muted-foreground",

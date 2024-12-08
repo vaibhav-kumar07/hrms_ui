@@ -1,4 +1,6 @@
-// types.ts
+import { AttendanceStatus } from "./attendance";
+
+
 export interface IProfile {
     _id?: string;
     name: string;
@@ -11,9 +13,10 @@ export interface IProfile {
     img?: string;
     status?: IProfileStatus;
     joining_date?: Date;
-    role: IProfileRole;
+    role: IProfileRole
+    task?: string;
+    attendance_status?: AttendanceStatus;
 }
-
 export enum IProfileRole {
     candidate = 'CANDIDATE',
     employee = 'EMPLOYEE',
@@ -79,4 +82,6 @@ export interface CandidateParams {
     sortColumn?: string;
     status?: IProfileStatus
     position?: string;
+    attendance_status?: AttendanceStatus
+
 }
