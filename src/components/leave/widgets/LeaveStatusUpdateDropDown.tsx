@@ -1,9 +1,8 @@
 import React from "react";
 import Dropdown from "../../common/DropDown";
 import { ILeave, LeaveStatus } from "../../types/leave";
-import { useTagContext } from "../../../context/TagContext";
 import { updateLeaveStatus } from "../../../services/leaveService";
-import { useToast } from "../../../context/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
 
 interface LeaveStatusUpdateDropDownProps {
     rowData: ILeave;
@@ -13,21 +12,21 @@ const LeaveStatusUpdateDropDown: React.FC<LeaveStatusUpdateDropDownProps> = ({
     rowData,
 }) => {
     const { successToast } = useToast();
-    const { addTag } = useTagContext();
-    const tag = "leave";
     const statusOptions = Object.keys(LeaveStatus).map((key) => ({
         label: key.replace("_", " ").toUpperCase(),
         value: LeaveStatus[key as keyof typeof LeaveStatus],
     }));
 
-    const handleStatusChange = (newStatus: LeaveStatus) => {
-        updateLeaveStatus({
-            id: rowData._id as string,
-            status: newStatus,
-        });
-        successToast("Leaves Status Updated Successfully");
-
-        addTag(tag);
+    const handleStatusChange = async (newStatus: LeaveStatus) => {
+        try {
+            await updateLeaveStatus({
+                id: rowData._id as string,
+                status: newStatus,
+            });
+            successToast("Leaves Status Updated Successfully");
+        } catch (error) {
+            console.error("Error updating leave status", error);
+        }
     };
 
     return (

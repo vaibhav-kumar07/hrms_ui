@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { IAttendance } from "../../types/attendance"; // Import the enum
+import { IAttendance } from "../../types/attendance";
 import { updateAttendanceTask } from "../../../services/attendanceService";
-import { useToast } from "../../../context/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
 interface StatusUpdateInputProps {
     rowData: IAttendance;
     value: string;

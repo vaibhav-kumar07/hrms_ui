@@ -6,9 +6,9 @@ import {
     IProfileStatus,
 } from "../../types/profile";
 import { updateCandidateStatus } from "../../../services/candidateService";
-import { useTagContext } from "../../../context/TagContext";
+import { useTagContext } from "../../../contexts/TagContext";
 import { ErrorType } from "../../../utils/errorHandler";
-import { useToast } from "../../../context/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
 
 interface StatusFilterWidgetProps {
     rowData: IProfile;
@@ -20,8 +20,7 @@ const StatusFilterWidget: React.FC<StatusFilterWidgetProps> = ({
     currentStatus,
 }) => {
     const { successToast, errorToast } = useToast();
-    const { addTag } = useTagContext();
-    const tag = "candidate";
+    const { setTag } = useTagContext();
 
     const [selectedStatus, setSelectedStatus] = useState(currentStatus || "");
     const [fieldErrors, setFieldErrors] = useState<
@@ -39,7 +38,7 @@ const StatusFilterWidget: React.FC<StatusFilterWidgetProps> = ({
             });
 
             successToast("Candidate status updated successfully");
-            addTag(tag);
+            setTag("Candidate");
         } catch (error: any) {
             if (error.error_type === ErrorType.VALIDATION_ERROR) {
                 setFieldErrors(error.errors || []);

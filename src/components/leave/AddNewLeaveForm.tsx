@@ -5,7 +5,7 @@ import { z } from "zod";
 import { leaveSchema } from "../validation-schema/LeaveSchema";
 import { positions } from "../types/profile"; // Ensure 'positions' array is correctly imported
 import { addNewLeave } from "../../services/leaveService";
-import { useTagContext } from "../../context/TagContext";
+import { useTagContext } from "../../contexts/TagContext";
 import Dropdown from "../common/DropDown"; // Import the Dropdown component
 
 type LeaveFormValues = z.infer<typeof leaveSchema>;
@@ -15,9 +15,7 @@ export default function AddNewLeaveForm({
 }: {
     onSuccess: () => void;
 }) {
-    const { addTag } = useTagContext();
-    const tag = "leaves";
-
+    const { setTag } = useTagContext();
     const [generalError, setGeneralError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const {
@@ -42,7 +40,7 @@ export default function AddNewLeaveForm({
                 reason: data.reason,
             });
 
-            addTag(tag);
+            setTag("Leaves");
             setSuccessMessage("Leave Added Successfully");
             onSuccess();
             reset();

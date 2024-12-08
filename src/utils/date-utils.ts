@@ -25,16 +25,16 @@ export const dateToGMT = (inputDate: string, inputDateFormat: string) => {
 // Function to format the GMT date to IST (Indian Standard Time)
 export const formatDateToIST = (gmtDate: string): string => {
     const isValidDate = timezone(gmtDate, timezone.ISO_8601, true).isValid();
-    console.log("Input GMT Date:", gmtDate);
+    // console.log("Input GMT Date:", gmtDate);
     if (isValidDate) {
         const formattedDate = timezone(gmtDate)
             .tz("Asia/Kolkata") // Convert to IST timezone
             .format("YYYY-MM-DD"); // Format as desired
-        console.log("Formatted IST Date:", formattedDate);
+        // console.log("Formatted IST Date:", formattedDate);
         return formattedDate;
     } else {
         // If the date is invalid, log an error and return a fallback string
-        console.error("Invalid GMT Date format:", gmtDate);
+        // console.error("Invalid GMT Date format:", gmtDate);
         return gmtDate; // You can customize this fallback message
     }
 };

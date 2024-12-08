@@ -77,7 +77,6 @@ export default function LeavesTable(props: LeaveTableProps) {
             />
             {props.leaveRecords?.length ? (
                 props.leaveRecords.map((record: ILeave, index: number) => {
-                    console.log("record: ", record);
                     const fomattedDate = formatDateToIST(
                         record.date.toString(),
                     );

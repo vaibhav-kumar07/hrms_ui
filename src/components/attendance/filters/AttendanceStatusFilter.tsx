@@ -1,5 +1,5 @@
-import UrlBasedDropDown from "../common/UrlBasedDropDown";
-import { AttendanceStatusOption } from "../types/attendance";
+import UrlBasedDropDown from "../../common/UrlBasedDropDown";
+import { AttendanceStatusOption } from "../../types/attendance";
 
 export default function AttendanceStatusFilter() {
     return (

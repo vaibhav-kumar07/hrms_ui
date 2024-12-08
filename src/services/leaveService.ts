@@ -5,11 +5,8 @@ import { QueryParameters } from '../components/types/common';
 import qs from 'query-string';
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-
-
 export const getLeaves = async (params: LeaveParams): Promise<any> => {
     const response = await FetchUtils.get(`${backendUrl}/api/leaves?${buildQueryString(params)}`, { isWithToken: true });
-    console.log("Fetching attendance", response)
     return response;
 };
 

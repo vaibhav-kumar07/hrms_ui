@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { addNewCandidate } from "../../services/candidateService";
-import { useTagContext } from "../../context/TagContext";
+import { useTagContext } from "../../contexts/TagContext";
 import Dropdown from "../common/DropDown";
 import { positions } from "../types/profile";
-import { useToast } from "../../context/ToastContext";
+import { useToast } from "../../contexts/ToastContext";
 
 const addCandidateSchema = z.object({
     fullName: z.string().min(1, "Full Name is required"),
@@ -34,9 +34,7 @@ export default function AddCandidateForm({
     onSuccess: () => void;
 }) {
     const { successToast } = useToast();
-    const { addTag } = useTagContext();
-    const tag = "candidate";
-
+    const { setTag } = useTagContext();
     const [fieldErrors, setFieldErrors] = useState<
         Array<{ field: string; value: string }>
     >([]);
@@ -66,7 +64,7 @@ export default function AddCandidateForm({
                 position: data.position,
             });
             successToast("Candidates added successfully");
-            addTag(tag);
+            setTag("Candidate");
             if (response) {
                 setTimeout(() => {
                     onSuccess();

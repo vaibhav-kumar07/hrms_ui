@@ -2,8 +2,7 @@ import React from "react";
 import Dropdown from "../../common/DropDown";
 import { AttendanceStatus, IAttendance } from "../../types/attendance"; // Import the enum
 import { updateAttendanceStatus } from "../../../services/attendanceService";
-import { useTagContext } from "../../../context/TagContext";
-import { useToast } from "../../../context/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
 
 interface StatusUpdateDropDownProps {
     rowData: IAttendance;
@@ -13,8 +12,7 @@ const StatusUpdateDropDown: React.FC<StatusUpdateDropDownProps> = ({
     rowData,
 }) => {
     const { successToast } = useToast();
-    const { addTag } = useTagContext();
-    const tag = "attendance";
+
     const statusOptions = Object.keys(AttendanceStatus).map((key) => ({
         label: key.replace("_", " ").toUpperCase(),
         value: AttendanceStatus[key as keyof typeof AttendanceStatus],
@@ -26,7 +24,6 @@ const StatusUpdateDropDown: React.FC<StatusUpdateDropDownProps> = ({
             status: newStatus,
         });
         successToast("Employee Status  Updated Successfully");
-        addTag(tag);
     };
 
     return (

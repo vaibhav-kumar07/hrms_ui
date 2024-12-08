@@ -1,22 +1,20 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IProfileStatus } from "../types/profile";
 import { getCandidates } from "../../services/candidateService";
 import CandidatesTable from "./CandidatesTable";
 import PageHeader from "../common/PageHeader";
 import CandidateFilters from "./filters/CandidateFilters";
-import { useTagContext } from "../../context/TagContext";
+import { useTagContext } from "../../contexts/TagContext";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../common/pagination/Pagination";
 import { IResponse } from "../types/common";
 import Loader from "../common/Loader";
 
 export default function Candidates() {
-    const { tags } = useTagContext();
-    const tag = "candidate";
+    const { clearTag, isTagOn } = useTagContext();
     const [candidates, setCandidates] = useState<IResponse>();
     const [loading, setLoading] = useState<boolean>(true);
     const [searchParams] = useSearchParams();
-    const currentTag = tags[tag];
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
     const position = searchParams.get("position") || "";
@@ -24,7 +22,7 @@ export default function Candidates() {
     const searchText = searchParams.get("q") || "";
 
     const reloadCandidates = useCallback(async () => {
-        setLoading(true); // Set loading to true before fetching data
+        setLoading(true);
         try {
             const result = await getCandidates({
                 rowsPerPage: rowsPerPage as number,
@@ -37,13 +35,17 @@ export default function Candidates() {
         } catch (error) {
             console.error("Error fetching candidates:", error);
         } finally {
-            setLoading(false); // Set loading to false after fetching data
+            setLoading(false);
         }
-    }, [rowsPerPage, page, position, status, searchText]);
+    }, [rowsPerPage, page, status, searchText, position]);
 
     useEffect(() => {
-        reloadCandidates();
-    }, [reloadCandidates, currentTag]);
+        if (isTagOn("Candidate")) {
+            reloadCandidates().then(() => clearTag("Candidate"));
+        } else {
+            reloadCandidates();
+        }
+    }, [reloadCandidates, isTagOn, clearTag]);
 
     return (
         <section className="flex flex-col gap-4">

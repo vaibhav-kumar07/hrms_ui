@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { setCookie } from "../../utils/cookies";
 import { loginUser } from "../../services/authService";
 import { ErrorType } from "../../utils/errorHandler";
@@ -9,7 +9,7 @@ import { ErrorType } from "../../utils/errorHandler";
 import Button from "./Button";
 import Logo from "./Logo";
 import Input from "./Input";
-import { useToast } from "../../context/ToastContext";
+import { useToast } from "../../contexts/ToastContext";
 
 const loginSchema = z.object({
     email: z.string().email("Please enter a valid email address"),

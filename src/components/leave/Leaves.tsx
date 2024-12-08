@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PageHeader from "../common/PageHeader";
-import { useTagContext } from "../../context/TagContext";
+import { useTagContext } from "../../contexts/TagContext"; // Ensure context is used
 import { LeaveStatus } from "../types/leave";
 import { getLeaves } from "../../services/leaveService";
 import LeavesTable from "./LeaveTable";
@@ -11,8 +11,7 @@ import LeavesFilters from "./filters/LeavesFilters";
 import Loader from "../common/Loader";
 
 export default function Leaves() {
-    const { tags } = useTagContext();
-    const tag = "leaves";
+    const { clearTag, isTagOn } = useTagContext(); // Use context
     const [response, setResponse] = useState<IResponse>();
     const [searchParams] = useSearchParams();
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
@@ -20,11 +19,9 @@ export default function Leaves() {
     const searchText = searchParams.get("q") || "";
     const status = searchParams.get("status") as LeaveStatus;
     const [loading, setLoading] = useState<boolean>(true);
-    const currentTag = tags[tag];
 
-    // Memoize the reloadCandidates function
-    const reloadCandidates = useCallback(async () => {
-        setLoading(true); // Set loading to true before fetching data
+    const reloadLeaves = useCallback(async () => {
+        setLoading(true);
         try {
             const result = await getLeaves({
                 rowsPerPage: rowsPerPage as number,
@@ -34,15 +31,19 @@ export default function Leaves() {
             });
             setResponse(result);
         } catch (error) {
-            console.error("Error fetching candidates:", error);
+            console.error("Error fetching leaves:", error);
         } finally {
-            setLoading(false); // Set loading to false after fetching data
+            setLoading(false);
         }
     }, [rowsPerPage, page, status, searchText]);
 
     useEffect(() => {
-        reloadCandidates();
-    }, [reloadCandidates, currentTag]);
+        if (isTagOn("Leaves")) {
+            reloadLeaves().then(() => clearTag("Leaves"));
+        } else {
+            reloadLeaves();
+        }
+    }, [reloadLeaves, isTagOn, clearTag]);
 
     return (
         <section className="flex flex-col gap-4 ">

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IProfile } from "../types/profile";
 import EmployeesTable from "./EmployeeTable";
 import PageHeader from "../common/PageHeader";
-import { useTagContext } from "../../context/TagContext";
+import { useTagContext } from "../../contexts/TagContext";
 import { getEmployees } from "../../services/employeeService";
 import { useSearchParams } from "react-router-dom";
 import { IResponse } from "../types/common";
@@ -10,10 +10,8 @@ import Pagination from "../common/pagination/Pagination";
 import Employeefilters from "./Employeefilters";
 import Loader from "../common/Loader";
 export default function Employees() {
-    const { tags } = useTagContext();
-    const tag = "employee";
+    const { clearTag, isTagOn } = useTagContext();
     const [searchParams] = useSearchParams();
-    const currentTag = tags[tag];
     const [loading, setLoading] = useState<boolean>(true);
     const [response, setResponse] = useState<IResponse>();
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
@@ -22,7 +20,7 @@ export default function Employees() {
     const searchText = searchParams.get("q") || "";
 
     // Memoize the reloadCandidates function
-    const reloadCandidates = useCallback(async () => {
+    const reloadEmployees = useCallback(async () => {
         setLoading(true); // Set loading to true before fetching
         try {
             const result = await getEmployees({
@@ -35,13 +33,28 @@ export default function Employees() {
         } catch (error: any) {
             console.error("Error fetching candidates:", error);
         } finally {
-            setLoading(false); // Set loading to false after fetching data
+            setLoading(false);
         }
     }, [rowsPerPage, page, position, searchText]);
 
+    const tagIsOn = isTagOn("Employee");
     useEffect(() => {
-        reloadCandidates();
-    }, [reloadCandidates, currentTag]);
+        reloadEmployees();
+    }, [reloadEmployees]);
+
+    useEffect(() => {
+        if (tagIsOn || page || position || searchText || rowsPerPage) {
+            reloadEmployees().then(() => clearTag("Employee"));
+        }
+    }, [
+        reloadEmployees,
+        tagIsOn,
+        clearTag,
+        rowsPerPage,
+        page,
+        position,
+        searchText,
+    ]);
 
     return (
         <section className="flex flex-col gap-4">

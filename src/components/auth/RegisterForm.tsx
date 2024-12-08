@@ -6,8 +6,8 @@ import { z } from "zod";
 import Input from "./Input"; // Import Input component
 import { setCookie } from "../../utils/cookies";
 import Logo from "./Logo";
-import { useAuth } from "../../context/AuthContext";
-import { useToast } from "../../context/ToastContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../contexts/ToastContext";
 
 const RegisterSchema = z
     .object({

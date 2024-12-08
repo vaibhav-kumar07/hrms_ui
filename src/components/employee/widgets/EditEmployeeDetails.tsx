@@ -3,9 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { updateEmployee } from "../../../services/employeeService";
 import { IProfile, positions } from "../../types/profile";
-import { useTagContext } from "../../../context/TagContext";
+import { useTagContext } from "../../../contexts/TagContext";
 import Dropdown from "../../common/DropDown"; // Import the Dropdown component
-import { useToast } from "../../../context/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
 
 const updateEmployeeSchema = z.object({
     fullName: z.string().min(1, "Full Name is required"),
@@ -27,8 +27,7 @@ export default function UpdateEmployeeForm({
     employee: IProfile;
     onSuccess: () => void;
 }) {
-    const { addTag } = useTagContext();
-    const tag = "employee";
+    const { setTag } = useTagContext();
     const { successToast } = useToast();
     const {
         register,
@@ -55,7 +54,7 @@ export default function UpdateEmployeeForm({
             department: data.department,
             position: data.position,
         });
-        addTag(tag);
+        setTag("Employee");
         if (response.message) {
             successToast("Employee Details Updated Successfully");
             onSuccess();

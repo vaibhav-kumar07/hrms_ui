@@ -1,5 +1,5 @@
-import AttendanceStatusFilter from "./AttendanceStatusFilter";
-import SearchBox from "../common/SearchBox";
+import AttendanceStatusFilter from "../filters/AttendanceStatusFilter";
+import SearchBox from "../../common/SearchBox";
 
 export default function AttendanceFilters() {
     return (
