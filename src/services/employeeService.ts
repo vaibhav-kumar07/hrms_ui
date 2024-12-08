@@ -5,9 +5,9 @@ import * as FetchUtils from '../utils/fetch';
 import qs from 'query-string';
 import { AttendanceStatus } from '../components/types/attendance';
 import { formatDate } from '../utils/date-utils';
-// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const backendUrl = "http://localhost:6001";
+
 export const getEmployees = async (params: CandidateParams): Promise<any> => {
     const formattedate = formatDate(new Date(), "YYYY-MM-DD")
     console.log("Formatting date", formattedate, params)
