@@ -42,4 +42,5 @@ export interface LeaveParams {
     sortColumn?: string;
     status?: LeaveStatus
     position?: string;
+    today?: string
 }

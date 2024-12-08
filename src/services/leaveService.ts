@@ -3,7 +3,9 @@ import * as FetchUtils from '../utils/fetch';
 import { LeaveParams, LeaveStatus } from '../components/types/leave';
 import { QueryParameters } from '../components/types/common';
 import qs from 'query-string';
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+import { formatDate } from '../utils/date-utils';
+// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = "http://localhost:6001"
 
 export const getLeaves = async (params: LeaveParams): Promise<any> => {
     const response = await FetchUtils.get(`${backendUrl}/api/leaves?${buildQueryString(params)}`, { isWithToken: true });
@@ -40,7 +42,7 @@ export async function addNewLeave({
 }) {
     let body = {
         name,
-        date,
+        date: formatDate(date, "YYYY-MM-DD"),
         position,
         reason
     }
@@ -77,6 +79,7 @@ const buildQueryString = (params: LeaveParams) => {
     queryParams["filters[position][$eq]"] = params.position === "ALL" ? "" : params.position?.toString()
     queryParams["filters[status][$eq]"] =
         params.status === "ALL" ? "" : params.status?.toString()
+    queryParams["today"] = params.today;
     //   let deliveryDateEnd = params.deliveryDateEnd;
     //   if (!deliveryDateEnd) {
     //     deliveryDateEnd = params.deliveryDateStart;

@@ -4,6 +4,7 @@ import StatusFilterWidget from "../candidate/widgets/StatusFilterWidget";
 import { EditEmployeeDialog } from "../employee/widgets/EditEmployeeDialog";
 import LeaveStatusUpdateDropDown from "../leave/widgets/LeaveStatusUpdateDropDown";
 import { IProfileStatus } from "../types/profile";
+import DesignationWidget from "./widgets/Designation";
 
 const widgets: any = {
     editEmployeeWidget: (value: string, rowData: any) => {
@@ -33,6 +34,11 @@ const widgets: any = {
     leaveStatusUpdateDropDown: (value: string, rowData: any) => {
         console.log("value", value);
         return <LeaveStatusUpdateDropDown rowData={rowData} />;
+    },
+
+    designationWidget: (value: string, rowData: any) => {
+        console.log("value", value);
+        return <DesignationWidget rowData={rowData} />;
     },
 };
 

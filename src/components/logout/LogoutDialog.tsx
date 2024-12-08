@@ -58,7 +58,7 @@ export default function LogoutConfirmationDialog({
             <button
                 onClick={handleDialogOpen}
                 className={cn(
-                    ` px-10 mt-1 flex items-center gap-3 text-gray-400 font-medium transition-colors bg-gray-500 `,
+                    ` px-10 mt-1 flex items-center gap-3 text-gray-400 font-medium transition-colors `,
                     className,
                 )}
             >

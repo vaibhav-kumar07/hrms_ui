@@ -9,6 +9,7 @@ import { IResponse } from "../types/common";
 import Pagination from "../common/pagination/Pagination";
 import LeavesFilters from "./filters/LeavesFilters";
 import Loader from "../common/Loader";
+import LeaveList from "./LeaveList/LeaveList";
 
 export default function Leaves() {
     const { clearTag, isTagOn } = useTagContext(); // Use context
@@ -46,26 +47,49 @@ export default function Leaves() {
     }, [reloadLeaves, isTagOn, clearTag]);
 
     return (
-        <section className="flex flex-col gap-4 ">
+        <section className="flex flex-col gap-4">
             <PageHeader
                 label="Leaves"
-                className=" px-8 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
+                className="px-8 py-5 md:pt-8 md:pb-4 md:px-8 border-b"
             />
 
             {loading ? (
                 <Loader />
             ) : (
-                <>
-                    <LeavesFilters />
-                    <LeavesTable
-                        leaveRecords={response?.data}
-                        className="px-8"
-                    />
-                    <Pagination
-                        className="px-8"
-                        recordCount={response?.meta.pagination.total as number}
-                    />
-                </>
+                <section className="h-full flex flex-col gap-4 px-8">
+                    {/* Leave Filters Section */}
+                    <section className="flex justify-between items-center gap-4">
+                        <LeavesFilters />
+                    </section>
+
+                    {/* Main Content Section */}
+                    <section className="flex flex-col md:flex-row gap-8">
+                        {/* Leave Table Section */}
+                        <article className="flex-1">
+                            <LeavesTable
+                                leaveRecords={response?.data}
+                                className="w-full"
+                            />
+
+                            {/* Pagination Section */}
+                            <section className="mt-4">
+                                <h2 className="sr-only">Pagination</h2>
+                                <Pagination
+                                    className="w-full"
+                                    recordCount={
+                                        response?.meta.pagination
+                                            .total as number
+                                    }
+                                />
+                            </section>
+                        </article>
+
+                        {/* Leave List Section */}
+                        <aside className="md:w-1/3 h-full">
+                            <LeaveList />
+                        </aside>
+                    </section>
+                </section>
             )}
         </section>
     );

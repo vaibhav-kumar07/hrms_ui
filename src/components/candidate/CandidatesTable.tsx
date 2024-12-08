@@ -50,6 +50,8 @@ const profilesMetadata: ITableMetadata[] = [
         sortable: false,
         columnClass: "w-full md:w-[15%] text-left text-muted-foreground",
         cellClass: "w-full md:w-[15%] ",
+        type: "widget",
+        widgetName: "designationWidget",
     },
     {
         columnName: "department",

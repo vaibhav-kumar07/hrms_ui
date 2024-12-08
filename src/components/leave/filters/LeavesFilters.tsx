@@ -4,7 +4,7 @@ import AddNewLeaveDialog from "../AddNewLeaveDialog";
 
 export default function LeavesFilters() {
     return (
-        <div className="w-full grid grid-cols-2 px-10 gap-2 md:gap-4">
+        <div className="w-full grid grid-cols-2 px-4 gap-2 md:gap-4">
             <LeavesStatusFilter />
             <div className="grid grid-cols-2 items-center gap-4">
                 <SearchBox />

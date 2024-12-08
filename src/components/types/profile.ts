@@ -31,6 +31,7 @@ export enum IProfileStatus {
 }
 
 
+
 export const positions = [
     { value: "ALL", label: "All" },
     { value: "INTERN", label: "Intern" },

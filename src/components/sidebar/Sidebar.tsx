@@ -68,8 +68,8 @@ const Sidebar: React.FC = () => {
                     Others
                 </Label>
                 <LogoutConfirmationDialog
-                    className="w-full p-0 bg-gray-100 flex justify-center"
-                    labelClass="hidden md:flex"
+                    className="w-full p-0  md:px-10 flex justify-center md:justify-start"
+                    labelClass="hidden md:flex "
                 />
             </nav>
         </aside>

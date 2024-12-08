@@ -16,8 +16,9 @@ const leaveMetadata: ITableMetadata[] = [
         columnName: "index",
         headerLabel: "Sr No.",
         sortable: false,
-        columnClass: "w-full md:w-[5%] text-left text-muted-foreground md:pl-4",
-        cellClass: "w-full md:w-[5%] text-left md:pl-3 ",
+        columnClass:
+            "w-full md:w-[10%] text-left text-muted-foreground md:pl-4",
+        cellClass: "w-full md:w-[10%] text-left md:pl-3 ",
     },
     {
         columnName: "name",
@@ -51,15 +52,6 @@ const leaveMetadata: ITableMetadata[] = [
         cellClass: "w-full md:w-[15%] ",
         type: "widget",
         widgetName: "leaveStatusUpdateDropDown",
-    },
-    {
-        columnName: "docs",
-        headerLabel: "Documents",
-        sortable: false,
-        columnClass: "w-full md:w-[15%] text-left text-muted-foreground",
-        cellClass: "w-full md:w-[15%] ",
-        // type: "widget",
-        // widgetName: "documentViewerWidget",
     },
 ];
 
