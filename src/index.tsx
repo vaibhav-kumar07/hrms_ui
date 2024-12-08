@@ -3,19 +3,24 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { TagProvider } from "./context/tagContext";
-import { AuthProvider } from "./context/authContext";
+import { TagProvider } from "./context/TagContext";
+import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastContext";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement,
 );
 root.render(
     <React.StrictMode>
-        <AuthProvider>
-            <TagProvider>
-                <App />
-            </TagProvider>
-        </AuthProvider>
+        <ToastProvider
+            children={
+                <AuthProvider>
+                    <TagProvider>
+                        <App />
+                    </TagProvider>
+                </AuthProvider>
+            }
+        />
     </React.StrictMode>,
 );
 

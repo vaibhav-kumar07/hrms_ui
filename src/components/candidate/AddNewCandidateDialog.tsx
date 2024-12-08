@@ -31,7 +31,7 @@ export default function AddNewCandidateDialog({
                 Add New Candidate
             </CommonButton>
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="max-w-[100%] rounded-3xl sm:rounded-3xl md:max-w-3xl bg-white overflow-hidden">
+                <DialogContent className=" rounded-3xl sm:rounded-3xl md:max-w-3xl bg-white overflow-hidden ">
                     <DialogHeader className="bg-primary text-primary-foreground">
                         <DialogTitle>
                             <h2 className="text-xl text-center font-semibold py-4">

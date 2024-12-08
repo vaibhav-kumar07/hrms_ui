@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dropdown from "../../common/DropDown";
 import {
     FormStatusOptions,
@@ -6,8 +6,9 @@ import {
     IProfileStatus,
 } from "../../types/profile";
 import { updateCandidateStatus } from "../../../services/candidateService";
-import { useTagContext } from "../../../context/tagContext";
+import { useTagContext } from "../../../context/TagContext";
 import { ErrorType } from "../../../utils/errorHandler";
+import { useToast } from "../../../context/ToastContext";
 
 interface StatusFilterWidgetProps {
     rowData: IProfile;
@@ -18,48 +19,42 @@ const StatusFilterWidget: React.FC<StatusFilterWidgetProps> = ({
     rowData,
     currentStatus,
 }) => {
-    console.log("rowdata", rowData);
+    const { successToast, errorToast } = useToast();
     const { addTag } = useTagContext();
     const tag = "candidate";
+
     const [selectedStatus, setSelectedStatus] = useState(currentStatus || "");
     const [fieldErrors, setFieldErrors] = useState<
         Array<{ field: string; value: string }>
     >([]);
 
-    function handleDropdownChange(value: IProfileStatus) {
+    const handleDropdownChange = async (value: IProfileStatus) => {
+        if (value === selectedStatus) return;
         setSelectedStatus(value);
-    }
+        setFieldErrors([]);
+        try {
+            await updateCandidateStatus({
+                id: rowData._id as string,
+                status: value,
+            });
 
-    useEffect(() => {
-        const handleUpdateService = async () => {
-            setFieldErrors([]);
-            setSelectedStatus(selectedStatus);
-
-            try {
-                await updateCandidateStatus({
-                    id: rowData._id as string,
-                    status: selectedStatus,
-                });
-                addTag(tag);
-            } catch (error: any) {
-                if (error.error_type === ErrorType.VALIDATION_ERROR) {
-                    setFieldErrors(error.errors || []);
-                }
+            successToast("Candidate status updated successfully");
+            addTag(tag);
+        } catch (error: any) {
+            if (error.error_type === ErrorType.VALIDATION_ERROR) {
+                setFieldErrors(error.errors || []);
             }
-        };
-
-        if (currentStatus !== selectedStatus) {
-            handleUpdateService();
+            errorToast("Error updating candidate status");
         }
-    }, [selectedStatus, currentStatus, rowData._id, addTag]);
+    };
 
     return (
         <Dropdown
             className="border shadow-none py-1"
             options={FormStatusOptions}
             value={selectedStatus}
-            onChange={(selectedStatus: string) =>
-                handleDropdownChange(selectedStatus as IProfileStatus)
+            onChange={(value: string) =>
+                handleDropdownChange(value as IProfileStatus)
             }
             error={fieldErrors.find((err) => err.field === "status")?.value}
         />

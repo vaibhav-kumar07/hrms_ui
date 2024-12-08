@@ -2,13 +2,17 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { FaSignOutAlt } from "react-icons/fa";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { setCookie } from "../../utils/cookies";
+import { cn } from "../../utils/cn";
+// import CommonButton from "../common/Button";
 
 export default function LogoutConfirmationDialog({
     className,
+    labelClass,
 }: {
     className?: string;
+    labelClass?: string;
 }) {
     const { setToken } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
@@ -53,15 +57,18 @@ export default function LogoutConfirmationDialog({
         <>
             <button
                 onClick={handleDialogOpen}
-                className={` px-10 mt-1 flex items-center gap-3 text-gray-400 font-medium transition-colors ${className}`}
+                className={cn(
+                    ` px-10 mt-1 flex items-center gap-3 text-gray-400 font-medium transition-colors bg-gray-500 `,
+                    className,
+                )}
             >
-                <FaSignOutAlt size={18} />
-                <span>Log out</span>
+                <FaSignOutAlt size={25} />
+                <span className={cn("", labelClass)}>Log out</span>
             </button>
             {isOpen && (
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogContent
-                        className="max-w-[100%] sm:rounded-3xl md:max-w-md bg-white p-0 overflow-hidden"
+                        className="border-none shadow-none sm:rounded-3xl md:max-w-md bg-white p-0 overflow-hidden"
                         ref={dialogRef}
                         onClick={(e) => e.stopPropagation()}
                     >

@@ -7,7 +7,7 @@ import Candidates from "../components/candidate/Candidates";
 import Leaves from "../components/leave/Leaves";
 import Employees from "../components/employee/Employees";
 import Attendences from "../components/attendance/Attendance";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 
 const AppRoutes: React.FC = () => {
     // let token = getCookieValue("token");

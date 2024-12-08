@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { setCookie } from "../../utils/cookies";
 import { loginUser } from "../../services/authService";
 import { ErrorType } from "../../utils/errorHandler";
@@ -9,6 +9,7 @@ import { ErrorType } from "../../utils/errorHandler";
 import Button from "./Button";
 import Logo from "./Logo";
 import Input from "./Input";
+import { useToast } from "../../context/ToastContext";
 
 const loginSchema = z.object({
     email: z.string().email("Please enter a valid email address"),
@@ -16,6 +17,7 @@ const loginSchema = z.object({
 });
 
 const LoginForm: React.FC = () => {
+    const { successToast } = useToast();
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [fieldErrors, setFieldErrors] = useState<
         Array<{ field: string; value: string }>
@@ -38,13 +40,15 @@ const LoginForm: React.FC = () => {
                 email: validatedData.email,
                 password: validatedData.password,
             });
-            setToken(result.token);
-            setCookie("token", result.token);
-            setSuccessMessage("Login successful!");
+
+            successToast("Login successful");
             setGeneralError(null);
             setFieldErrors([]);
+
             setTimeout(() => {
                 navigate("/dashboard");
+                setCookie("token", result.token);
+                setToken(result.token);
             }, 2000);
         } catch (error: any) {
             if (error instanceof z.ZodError) {
@@ -69,21 +73,32 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <div className="w-full flex flex-col justify-center items-center md:w-1/2 bg-white p-8 rounded-3xl md:rounded-l-2xl shadow-md border border-gray-300">
-            <div className="relative top-4 left-4">
+        <div className="relative w-full flex flex-col justify-center items-center md:w-1/2 bg-white p-8 rounded-3xl md:rounded-l-2xl shadow-md border border-gray-300">
+            {/* Logo */}
+            <div className="absolute top-4 left-4">
                 <Logo />
             </div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-                Welcome Back!
-            </h1>
-            {generalError && (
-                <div className="text-red-600 text-sm mb-4">{generalError}</div>
-            )}
+
+            {/* Success Notification */}
             {successMessage && (
-                <div className="text-green-600 text-sm mb-4">
+                <div
+                    className="absolute top-6 right-6 bg-green-100 text-green-700 px-4 py-2 rounded-md shadow-lg 
+                                text-sm font-medium transition-opacity animate-fade-in-out"
+                >
                     {successMessage}
                 </div>
             )}
+
+            <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+                Welcome Back!
+            </h1>
+
+            {/* Error Message */}
+            {generalError && (
+                <div className="text-red-600 text-sm mb-4">{generalError}</div>
+            )}
+
+            {/* Form */}
             <form className="space-y-6 w-full px-12" onSubmit={handleSubmit}>
                 <Input
                     label="Email Address"
@@ -107,6 +122,7 @@ const LoginForm: React.FC = () => {
                     }
                 />
                 <Button type="submit" text="Login" />
+
                 <p className="text-center text-sm mt-4 text-gray-800">
                     Don't have an account?{" "}
                     <a

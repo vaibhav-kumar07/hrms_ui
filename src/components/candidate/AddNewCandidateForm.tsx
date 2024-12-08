@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { addNewCandidate } from "../../services/candidateService";
-import { useTagContext } from "../../context/tagContext";
+import { useTagContext } from "../../context/TagContext";
 import Dropdown from "../common/DropDown";
 import { positions } from "../types/profile";
+import { useToast } from "../../context/ToastContext";
 
 const addCandidateSchema = z.object({
     fullName: z.string().min(1, "Full Name is required"),
@@ -32,6 +33,7 @@ export default function AddCandidateForm({
 }: {
     onSuccess: () => void;
 }) {
+    const { successToast } = useToast();
     const { addTag } = useTagContext();
     const tag = "candidate";
 
@@ -63,10 +65,12 @@ export default function AddCandidateForm({
                 experience: Number(data.experience),
                 position: data.position,
             });
-
+            successToast("Candidates added successfully");
             addTag(tag);
             if (response) {
-                onSuccess();
+                setTimeout(() => {
+                    onSuccess();
+                }, 2000);
             }
         } catch (error: any) {
             if (error instanceof z.ZodError) {
@@ -98,7 +102,7 @@ export default function AddCandidateForm({
             className="bg-white p-4 rounded-lg shadow-lg max-w-3xl sm:px-8 mx-auto"
         >
             {generalError && (
-                <p className="text-sm text-warning text-center mb-4">
+                <p className="text-sm text-warning text-center mb-2">
                     {generalError}
                 </p>
             )}

@@ -6,7 +6,8 @@ import { z } from "zod";
 import Input from "./Input"; // Import Input component
 import { setCookie } from "../../utils/cookies";
 import Logo from "./Logo";
-import { useAuth } from "../.././context/authContext";
+import { useAuth } from "../../context/AuthContext";
+import { useToast } from "../../context/ToastContext";
 
 const RegisterSchema = z
     .object({
@@ -31,12 +32,12 @@ const RegisterPage: React.FC = () => {
         password: "",
         confirmPassword: "",
     });
-
+    const { successToast } = useToast();
     const [fieldErrors, setFieldErrors] = useState<
         Array<{ field: string; value: string }>
     >([]);
     const [generalError, setGeneralError] = useState<string | null>(null);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
     const navigate = useNavigate();
     const { setToken } = useAuth();
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,12 +68,15 @@ const RegisterPage: React.FC = () => {
                 email: formData.email,
                 password: formData.password,
             });
-            setCookie("token", result.token);
-            setSuccessMessage("Registration successful!");
-            setToken(result.token);
+
+            successToast("Registration successful!");
             setGeneralError(null);
             setFieldErrors([]);
-            navigate("/dashboard");
+            setTimeout(() => {
+                navigate("/dashboard");
+                setCookie("token", result.token);
+                setToken(result.token);
+            }, 2000);
         } catch (error: any) {
             if (error.error_type === ErrorType.VALIDATION_ERROR) {
                 setFieldErrors(error.errors || []);
@@ -84,8 +88,6 @@ const RegisterPage: React.FC = () => {
                 setGeneralError(error.message || "Something went wrong.");
                 setFieldErrors([]);
             }
-
-            setSuccessMessage(null); // Clear success message in case of error
         }
     };
 
@@ -94,6 +96,7 @@ const RegisterPage: React.FC = () => {
             <div className="relative top-4 left-4">
                 <Logo />
             </div>
+
             <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">
                 Welcome to Dashboard
             </h1>
@@ -102,13 +105,6 @@ const RegisterPage: React.FC = () => {
             {generalError && (
                 <div className="error-message text-red-600 text-xs mb-4">
                     {generalError}
-                </div>
-            )}
-
-            {/* Display Success Message */}
-            {successMessage && (
-                <div className="success-message text-green-600 text-xs mb-4">
-                    {successMessage}
                 </div>
             )}
 

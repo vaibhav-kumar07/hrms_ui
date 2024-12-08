@@ -2,17 +2,19 @@ import { useCallback, useEffect, useState } from "react";
 import { IProfile } from "../types/profile";
 import EmployeesTable from "./EmployeeTable";
 import PageHeader from "../common/PageHeader";
-import { useTagContext } from "../../context/tagContext";
+import { useTagContext } from "../../context/TagContext";
 import { getEmployees } from "../../services/employeeService";
 import { useSearchParams } from "react-router-dom";
 import { IResponse } from "../types/common";
 import Pagination from "../common/pagination/Pagination";
 import Employeefilters from "./Employeefilters";
+import Loader from "../common/Loader";
 export default function Employees() {
     const { tags } = useTagContext();
     const tag = "employee";
     const [searchParams] = useSearchParams();
     const currentTag = tags[tag];
+    const [loading, setLoading] = useState<boolean>(true);
     const [response, setResponse] = useState<IResponse>();
     const rowsPerPage = searchParams.get("rowsperpage") || 8;
     const page = searchParams.get("page") || 1;
@@ -21,13 +23,20 @@ export default function Employees() {
 
     // Memoize the reloadCandidates function
     const reloadCandidates = useCallback(async () => {
-        const result = await getEmployees({
-            rowsPerPage: rowsPerPage as number,
-            page: page as number,
-            position,
-            searchText,
-        });
-        setResponse(result);
+        setLoading(true); // Set loading to true before fetching
+        try {
+            const result = await getEmployees({
+                rowsPerPage: rowsPerPage as number,
+                page: page as number,
+                position,
+                searchText,
+            });
+            setResponse(result);
+        } catch (error: any) {
+            console.error("Error fetching candidates:", error);
+        } finally {
+            setLoading(false); // Set loading to false after fetching data
+        }
     }, [rowsPerPage, page, position, searchText]);
 
     useEffect(() => {
@@ -40,15 +49,21 @@ export default function Employees() {
                 label="Employees"
                 className=" px-8 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
             />
-            <Employeefilters />
-            <EmployeesTable
-                employees={response?.data as IProfile[]}
-                className="px-8 "
-            />
-            <Pagination
-                className="px-8"
-                recordCount={response?.meta.pagination.total as number}
-            />
+            {loading ? (
+                <Loader />
+            ) : (
+                <>
+                    <Employeefilters />
+                    <EmployeesTable
+                        employees={response?.data as IProfile[]}
+                        className="px-8 "
+                    />
+                    <Pagination
+                        className="px-8"
+                        recordCount={response?.meta.pagination.total as number}
+                    />
+                </>
+            )}
         </section>
     );
 }

@@ -122,7 +122,7 @@ export default function CandidatesTable(props: ProfileManagementTableProps) {
             ) : (
                 <div className="py-2 align-middle mx-auto">
                     <Label className="text-gray-500" variant="semibold">
-                        No Data found with the matching criteria
+                        No Candidates Found with matching Criteria
                     </Label>
                 </div>
             )}

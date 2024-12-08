@@ -3,7 +3,7 @@ import SearchBox from "../common/SearchBox";
 
 export default function Employeefilters() {
     return (
-        <div className="w-full px-8 flex justify-between items-center gap-4">
+        <div className="px-10 flex items-center justify-between gap-4">
             <DesignationFilter />
             <SearchBox />
         </div>
