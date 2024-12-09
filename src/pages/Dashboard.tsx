@@ -6,7 +6,7 @@ const Dashboard: React.FC = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             <Sidebar />
-            <main className="flex-grow  overflow-y-auto">
+            <main className="w-full flex-grow  overflow-y-auto pl-16 md:pl-60 ">
                 <Outlet />
             </main>
         </div>

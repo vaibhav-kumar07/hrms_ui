@@ -92,12 +92,12 @@ const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center md:w-1/2 bg-white p-10 rounded-3xl md:rounded-l-3xl md:rounded-r-none shadow-md md:border-y md:border-l border-gray-300">
-            <div className="relative top-4 left-4">
+        <div className="w-full h-full flex flex-col justify-center items-center md:w-1/2 bg-white p-0  md:p-10 rounded-3xl md:rounded-l-3xl md:rounded-r-none shadow-md md:border-y md:border-l border-gray-300">
+            <div className="">
                 <Logo />
             </div>
 
-            <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">
+            <h1 className="text-2xl font-bold text-gray-800 text-center mb-2">
                 Welcome to Dashboard
             </h1>
 
@@ -109,7 +109,7 @@ const RegisterPage: React.FC = () => {
             )}
 
             <form
-                className="w-full register-form grid grid-col-1 gap-4 px-4"
+                className="w-full register-form grid grid-col-1 gap-1 md:gap-4 px-4"
                 onSubmit={handleSubmit}
             >
                 <Input
@@ -157,11 +157,11 @@ const RegisterPage: React.FC = () => {
                 />
                 <button
                     type="submit"
-                    className="btn-primary mt-4 w-full py-3 bg-purple-700 text-white rounded-md text-lg font-semibold transition duration-200 ease-in-out hover:bg-purple-800"
+                    className="btn-primary mt-2 w-full py-3 bg-purple-700 text-white rounded-md text-lg font-semibold transition duration-200 ease-in-out hover:bg-purple-800"
                 >
                     Register
                 </button>
-                <p className="mt-4 text-center text-gray-800">
+                <p className="mt-2 text-center text-gray-800">
                     Already have an account?{" "}
                     <a
                         href="/login"

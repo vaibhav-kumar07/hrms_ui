@@ -49,7 +49,7 @@ export default function Attendences() {
         <section className="flex flex-col gap-4 ">
             <PageHeader
                 label="Attendances"
-                className=" px-8 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
+                className=" px-4 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
             />
 
             {loading ? (
@@ -59,10 +59,10 @@ export default function Attendences() {
                     <AttendanceFilters />
                     <AttendanceTable
                         attendanceRecords={response?.data}
-                        className="px-8 "
+                        className="px-4 md:px-8 "
                     />
                     <Pagination
-                        className="px-8"
+                        className="px-4 md:px-8"
                         recordCount={response?.meta.pagination.total as number}
                     />
                 </>

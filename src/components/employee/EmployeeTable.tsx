@@ -32,8 +32,8 @@ const employeeMetadata: ITableMetadata[] = [
         columnName: "email",
         headerLabel: "Email",
         sortable: false,
-        columnClass: "w-full md:w-[20%] text-left text-muted-foreground",
-        cellClass: "w-full md:w-[20%] text-left ",
+        columnClass: "w-full md:w-[20%] text-left text-muted-foreground ",
+        cellClass: "w-full md:w-[20%] text-left truncate ",
     },
     {
         columnName: "phone",

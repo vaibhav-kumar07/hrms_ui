@@ -57,10 +57,10 @@ export default function Employees() {
     ]);
 
     return (
-        <section className="flex flex-col gap-4">
+        <section className="w-full flex flex-col gap-4">
             <PageHeader
                 label="Employees"
-                className=" px-8 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
+                className=" px-2 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
             />
             {loading ? (
                 <Loader />
@@ -69,7 +69,7 @@ export default function Employees() {
                     <Employeefilters />
                     <EmployeesTable
                         employees={response?.data as IProfile[]}
-                        className="px-8 "
+                        className="px-4 md:px-8 "
                     />
                     <Pagination
                         className="px-8"

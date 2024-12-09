@@ -51,7 +51,7 @@ export default function Candidates() {
         <section className="flex flex-col gap-4">
             <PageHeader
                 label="Candidates"
-                className=" px-8 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
+                className=" px-4 py-5  md:pt-10  md:pb-4 md:px-8 border-b"
             />
 
             {loading ? (
@@ -61,10 +61,10 @@ export default function Candidates() {
                     <CandidateFilters />
                     <CandidatesTable
                         profiles={candidates?.data}
-                        className=" px-8 md:px-8 "
+                        className=" px-4 md:px-8 "
                     />
                     <Pagination
-                        className="px-8"
+                        className="px-4 md:px-8"
                         recordCount={
                             candidates?.meta.pagination.total as number
                         }

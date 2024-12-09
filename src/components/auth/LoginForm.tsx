@@ -24,7 +24,7 @@ const LoginForm: React.FC = () => {
     >([]);
     const { setToken } = useAuth();
     const [generalError, setGeneralError] = useState<string | null>(null);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
     const navigate = useNavigate();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,28 +68,17 @@ const LoginForm: React.FC = () => {
                 setGeneralError(error.message || "Something went wrong.");
                 setFieldErrors([]);
             }
-            setSuccessMessage(null);
         }
     };
 
     return (
-        <div className="relative w-full flex flex-col justify-center items-center md:w-1/2 bg-white p-8 rounded-3xl md:rounded-l-2xl shadow-md border border-gray-300">
+        <div className="relative w-full flex flex-col justify-center items-center md:w-1/2 bg-white p-0 md:p-8 rounded-3xl md:rounded-l-2xl shadow-md border border-gray-300">
             {/* Logo */}
-            <div className="absolute top-4 left-4">
+            <div className="mb-3 md:mb-5">
                 <Logo />
             </div>
 
-            {/* Success Notification */}
-            {successMessage && (
-                <div
-                    className="absolute top-6 right-6 bg-green-100 text-green-700 px-4 py-2 rounded-md shadow-lg 
-                                text-sm font-medium transition-opacity animate-fade-in-out"
-                >
-                    {successMessage}
-                </div>
-            )}
-
-            <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            <h1 className="text-2xl font-bold text-gray-800 mb-2 md:mb-6 text-center">
                 Welcome Back!
             </h1>
 
@@ -99,7 +88,10 @@ const LoginForm: React.FC = () => {
             )}
 
             {/* Form */}
-            <form className="space-y-6 w-full px-12" onSubmit={handleSubmit}>
+            <form
+                className="space-y-6 w-full p-5 md:px-12"
+                onSubmit={handleSubmit}
+            >
                 <Input
                     label="Email Address"
                     type="email"

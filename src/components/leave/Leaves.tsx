@@ -50,13 +50,13 @@ export default function Leaves() {
         <section className="flex flex-col gap-4">
             <PageHeader
                 label="Leaves"
-                className="px-8 py-5 md:pt-8 md:pb-4 md:px-8 border-b"
+                className="px-4 py-5 md:pt-8 md:pb-4 md:px-8 border-b"
             />
 
             {loading ? (
                 <Loader />
             ) : (
-                <section className="h-full flex flex-col gap-4 px-8">
+                <section className="h-full flex flex-col gap-4 px-2 md:px-8">
                     {/* Leave Filters Section */}
                     <section className="flex justify-between items-center gap-4">
                         <LeavesFilters />

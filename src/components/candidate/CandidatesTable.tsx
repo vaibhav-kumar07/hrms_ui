@@ -35,7 +35,7 @@ const profilesMetadata: ITableMetadata[] = [
         headerLabel: "Email",
         sortable: false,
         columnClass: "w-full md:w-[15%] text-left text-muted-foreground",
-        cellClass: "w-full md:w-[15%] text-left ",
+        cellClass: "w-full md:w-[15%] text-left truncate ",
     },
     {
         columnName: "phone",

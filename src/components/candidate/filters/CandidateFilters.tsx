@@ -5,7 +5,7 @@ import DesignationFilter from "./DesignationFilter";
 
 export default function CandidateFilters() {
     return (
-        <section className="w-full grid grid-cols-1 md:grid-cols-2 px-10  gap-2 md:gap-10">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 px-4 md:px-10  gap-2 md:gap-10">
             <div className="w-full grid grid-cols-2 gap-2 md:gap-2">
                 <DesignationFilter />
                 <CandidateStatusFilter />

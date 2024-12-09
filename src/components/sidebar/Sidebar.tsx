@@ -9,10 +9,9 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className="h-screen bg-white shadow-lg border-r transition-all 
-                       w-14 md:w-60 flex flex-col"
+            className="h-screen fixed left-0 bg-white shadow-lg border-r transition-all 
+                       w-16 md:w-60 flex flex-col  "
         >
-            {/* Logo Section */}
             <Link
                 to="/dashboard"
                 className="flex items-center justify-center md:justify-start gap-3 mb-8 py-5 md:p-5"
